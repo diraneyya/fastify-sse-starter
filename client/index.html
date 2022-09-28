@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Events Received via SSE</h1>
+    <p><em>To trigger a ROOT_ACCESSED event, please navigate to</em> <a target="_blank" 
+      href="http://localhost:3000">http://localhost:3000</a></p>
+    <ul id="EventList"></ul>
+    <script>
+      const evtSource = new EventSource("http://127.0.0.1:3000/events");
+      evtSource.onmessage = msg => {
+        const newElement = document.createElement("li");
+
+        newElement.textContent = `message: ${msg.data}`;
+        document.getElementById('EventList').appendChild(newElement);
+      };
+    </script>
+  </body>
+</html>
