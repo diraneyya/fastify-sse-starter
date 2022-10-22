@@ -1,4 +1,16 @@
 export class SseEventDispatcher {
+    
+    // Private static property: stores the value of an instance of the current class
+    static #instance;
+    
+    // in the constructor implements a singleton pattern 
+    constructor(){
+      if(SseEventDispatcher.#instance){
+        throw new Error("You can create only one instance!");
+      }
+      SseEventDispatcher.#instance = this;
+    }
+
     // Private property: stores a dynamic array to connected clients
     // An item in this array is a reply object in Fastify.
     // (https://www.fastify.io/docs/latest/Reference/Reply/)
